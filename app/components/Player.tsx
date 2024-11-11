@@ -22,7 +22,8 @@ function gamePlay(playerChoice: string, setResult: React.Dispatch<React.SetState
         result = "Computer Wins!"
     }
 
-    setResult(`Player Chose: ${playerChoice}, Computer chose: ${computerChoice}. ${result}`)
+    // setResult(`Player Chose: ${playerChoice}, Computer chose: ${computerChoice}. ${result}`)
+    setResult(`${result}`)
     setComputerChoice(computerChoice)
 }
 
