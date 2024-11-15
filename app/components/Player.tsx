@@ -32,9 +32,9 @@ function Player() {
     const [computerChoice, setComputerChoice] = useState<string>("")
 
   return (
-    <div>
+    <div className='min-[320px]:text-center '>
       
-      <div className='flex justify-center items-center p-3'><button className='border-b'>Player Choice</button></div>
+      <div className=' flex justify-center items-center p-3'><button className='border-b'>Player Choice</button></div>
 
       <div className="flex justify-center items-center p-2 m-2 gap-2">
       <button className="border px-4 py-1 rounded hover:bg-blue-600 m-2 font-semibold transition duration-150 hover:scale-125" onClick={()=>gamePlay("Rock", setResult, setComputerChoice)} value="Rock">Rock</button>
