@@ -1,15 +1,18 @@
 "use client"
 
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import confetti from 'canvas-confetti'
+
+
 function gamePlay(playerChoice: string, setResult: React.Dispatch<React.SetStateAction<string>>, setComputerChoice: React.Dispatch<React.SetStateAction<string>>) {
     
     const Choices =["Rock", "Paper", "Scissors"]
     const computerChoice:string = Choices[Math.floor(Math.random() * 3)];
     
+    
     let result;
     if(playerChoice === computerChoice){
-        result = "It's a Tie!"
+        result = "Tie!"
     } else if ((playerChoice === "Rock" && computerChoice === "Scissors") || (playerChoice === "Paper" && computerChoice === "Rock") || (playerChoice === "Scissors" && computerChoice === "Paper")){
         result = "Player Wins!";
 
@@ -30,8 +33,21 @@ function gamePlay(playerChoice: string, setResult: React.Dispatch<React.SetState
 function Player() {
     const [result, setResult] = useState<string>("");
     const [computerChoice, setComputerChoice] = useState<string>("")
-
-  return (
+    const [playerScore, setPlayerScore] = useState<number>(0)
+    const [computerScore, setComputerScore] = useState<number>(0)
+    const [tied, setTied] = useState<number>(0)
+    useEffect(()=>{
+      // let score = 0;
+      if (result === 'Computer Wins!') {
+         setComputerScore ((computerScore) => computerScore + 1)
+      } else if(result === 'Player Wins!'){
+        setPlayerScore((playerScore)=>playerScore + 1)
+        
+      } else if (result === 'Tie!') {
+        setTied((tied)=>tied+1)
+      }
+    },[result])
+    return (
     <div className='min-[320px]:text-center '>
       
       <div className=' flex justify-center items-center p-3'><button className='border-b'>Player Choice</button></div>
@@ -45,6 +61,14 @@ function Player() {
      <div className='flex justify-center items-center m-2'><button className='p-3 font-semibold scale-125 px-4 py-1 border rounded m-2 bg-blue-600'>{computerChoice || "Waiting..."}</button> </div>
 
      <div className='flex justify-center items-center p-3 font-semibold'>Result: {result}</div>
+
+    <div className='font-bold underline'>
+      Score:  
+      <div>Player: {playerScore}</div>
+      <div>Computer: {computerScore}</div>
+      <div>Tied: {tied}</div>
+      </div>    
+  
     </div>
   )
 }
